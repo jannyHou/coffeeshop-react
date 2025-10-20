@@ -1,0 +1,41 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+export const Login = ({setToken}) => {
+  const [emailValue, setEmailValue] = useState("");
+  const [pwdValue, setPwdValue] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    console.log("[handleLogin]")
+
+    const loginOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: emailValue, password:pwdValue })
+    };
+
+    const loginUrl = "http://0.0.0.0:8080/login"
+
+    const loginRes = await fetch(loginUrl, loginOptions)
+    const loginData = await loginRes.json()
+    console.log("Login Data:")
+    console.log(loginData)
+
+    setToken({token:loginData})
+    navigate("/")
+  }
+
+  return (
+    <div>
+      <p>Login page</p>
+      <form onSubmit={handleLogin}>
+        <input onChange={(event)=>setEmailValue(event.target.value)} type="text" name="Email" id="email" placeholder="Email" autoComplete="off" value={emailValue} />
+        <input onChange={(event)=>setPwdValue(event.target.value)} type="text" name="Password" id="password" placeholder="Password" autoComplete="off" value={pwdValue} />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  )
+}
