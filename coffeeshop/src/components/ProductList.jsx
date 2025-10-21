@@ -1,26 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
+import "./ProductList.css"
 
 export const ProductList = () => {
   const [current, setCurrent] = useState({})
   const [name, setName] = useState("Toronto")
+  const [purchases, setPurchases] = useState({})
+  const [redeems, setRedeems] = useState({})
 
   const load = async () => {
     const storesResponse = await fetch("http://0.0.0.0:8080/stores")
     const storesData = await storesResponse.json()
 
-    console.log("printing stores:")
-    console.log(storesData);
-
     const productsResponse = await fetch("http://0.0.0.0:8080/products")
     const productsData = await productsResponse.json()
-
-    console.log("printing products")
-    console.log(productsData)
     
     let storeinfo = storesData.filter(s => s.Name === name)[0]
 
     let currentinfo = {
+        id: storeinfo.Id,
         name: storeinfo.Name,
         discount: storeinfo.Discount,
         products: productsData.map((p)=>{
@@ -42,22 +40,63 @@ export const ProductList = () => {
 
   const navigate = useNavigate();
   const handlePurchase = () => {
-    navigate("/purchase", {state: {p1:9, p3:6}})
+    navigate("/purchase", {state: {storeid: current.id, products: purchases, redeems: redeems}})
+  }
+
+  const handleAdd = async (id) => {
+      setPurchases(prev => ({
+        ...prev,
+        [id]: (prev[id] ?? 0) + 1,
+      }));
+  }
+
+  const handleSub = async (id) => {
+      setPurchases(prev => ({
+        ...prev,
+        [id]: (prev[id] ?? 0) - 1,
+      }));
+  }
+
+    const handleAddRedeems = async (id) => {
+      setRedeems(prev => ({
+        ...prev,
+        [id]: (prev[id] ?? 0) + 1,
+      }));
+  }
+
+  const handleSubRedeems = async (id) => {
+      setRedeems(prev => ({
+        ...prev,
+        [id]: (prev[id] ?? 0) - 1,
+      }));
   }
 
   return (
     <section>
-        <h2>ProductList</h2>
-        <p>{current.name}</p>
-        <p>{current.discount}</p>
+        <p>Store: {current.name}</p>
+        <p>Store Discount: {current.discount}%</p>
+        <div className="ProductContainer">
         { current.products && current.products.map((p) => (
-            <div key={p.id}>
-                <p>{p.id}</p>
+            <div key={p.id} className="ProductList">
                 <p>{p.name}</p>
                 <p>{p.availability? "available": "not available"}</p>
+                <img src={`${p.id}.jpg`} alt="" />
+                <div className="plbutton">
+                  <span className="buttoninfo"> Purchase:</span>
+                  <button onClick={()=>handleAdd(p.id)}>ADD</button>
+                  <span className="buttonvalue">{purchases[p.id] ? purchases[p.id] : 0}</span>
+                  <button onClick={()=>handleSub(p.id)}>SUB</button>
+                </div>
+                <div className="plbutton">
+                  <span className="buttoninfo"> Redeem:</span><>&nbsp;&nbsp;</>
+                  <button onClick={()=>handleAddRedeems(p.id)}>ADD</button>
+                  <span className="buttonvalue">{redeems[p.id] ? redeems[p.id] : 0}</span>
+                  <button onClick={()=>handleSubRedeems(p.id)}>SUB</button>
+                </div>
             </div>            
         )) }
-        <button onClick={()=>handlePurchase()}>Purchase</button>
+        </div>
+        <button className="purchase" onClick={()=>handlePurchase()}>Purchase</button>
     </section>
   )
 }
