@@ -1,7 +1,7 @@
-import React from 'react'
+import "./Footer.css"
 
 export const Footer = () => {
   return (
-    <h2>Footer</h2>
+    <h4 className="footer">Copyright coffeelover@demo.com</h4>
   )
 }

@@ -1,0 +1,15 @@
+.signup {
+    display:block
+}
+
+.signup label {
+    display:block;
+    margin-top:20px;
+    margin-left:50px;
+}
+
+.signup-submit {
+     display:block;
+    margin-top:20px;
+    place-self: center;
+}

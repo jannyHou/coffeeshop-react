@@ -1,0 +1,31 @@
+img {
+  width: 300px;
+  height: 300px;
+}
+
+.ProductContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.ProductList {
+  display: block;
+  place-self: center;
+}
+
+.buttoninfo {
+    padding-right: 10px;
+}
+
+.buttonvalue {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.purchase {
+  display: block;
+  place-self: center;
+  width: 20%;
+  margin: 50px
+}
