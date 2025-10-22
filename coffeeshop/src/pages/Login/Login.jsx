@@ -32,9 +32,13 @@ export const Login = ({setToken}) => {
     <div>
       <p>Login page</p>
       <form onSubmit={handleLogin}>
-        <input onChange={(event)=>setEmailValue(event.target.value)} type="text" name="Email" id="email" placeholder="Email" autoComplete="off" value={emailValue} />
-        <input onChange={(event)=>setPwdValue(event.target.value)} type="text" name="Password" id="password" placeholder="Password" autoComplete="off" value={pwdValue} />
-        <button type="submit">Login</button>
+        <div class="mb-3">
+          <input class="form-control" onChange={(event)=>setEmailValue(event.target.value)} type="text" name="Email" id="email" placeholder="Email" autoComplete="off" value={emailValue} />
+        </div>
+        <div class="mb-3">
+          <input class="form-control" onChange={(event)=>setPwdValue(event.target.value)} type="text" name="Password" id="password" placeholder="Password" autoComplete="off" value={pwdValue} />
+        </div>
+        <button className= "btn btn-light" type="submit">Login</button>
       </form>
     </div>
   )

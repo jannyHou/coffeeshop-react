@@ -1,9 +1,11 @@
 import {useState} from 'react'
+import { useNavigate } from "react-router-dom";
 import "./Signup.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export const Signup = ({setToken}) => {
+export const Signup = () => {
   const [data, setData] = useState({})
+  const navigate = useNavigate();
 
   const handleSignup = async (event) =>{
       event.preventDefault();
@@ -28,9 +30,10 @@ export const Signup = ({setToken}) => {
       const signupUrl = "http://0.0.0.0:8080/register"
 
       const signupRes = await fetch(signupUrl, signupOptions)
-      const signupData = signupRes.json()
+      const signupData = await signupRes.json()
       console.log("signup result:")
       console.log(signupData)
+      navigate("/login")
   }
 
   return (

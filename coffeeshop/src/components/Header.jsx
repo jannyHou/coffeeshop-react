@@ -1,6 +1,8 @@
 import { jwtDecode } from 'jwt-decode'
 import { useEffect, useState } from 'react';
 import { Link} from "react-router-dom";
+import "./Header.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const Header = ({token, setToken}) => {
   const [credits, setCredits] = useState()
@@ -12,9 +14,6 @@ export const Header = ({token, setToken}) => {
       const userid = userinfo.id
       const user = await fetch(`http://0.0.0.0:8080/coffeelover/${userid}`)
       const userData = await user.json()
-      
-      console.log("[header] load userData")
-      console.log(userData)
 
       setCredits(userData.credits)
       setRedeems(userData.redeems)
@@ -27,9 +26,13 @@ export const Header = ({token, setToken}) => {
     return (
         <header>
             <nav>
-                <Link to="/">Home</Link>
-                <Link to="login">Login</Link>
-                <Link to="signup">Signup</Link>
+              <div className="navleft">
+                <Link to="/" className="Link">Home</Link>
+              </div>
+              <div className="navright">
+                <Link to="login" className="Link">Login</Link>
+                <Link to="signup" className="Link">Signup</Link>
+              </div>
             </nav>
         </header>
       )
@@ -38,10 +41,13 @@ export const Header = ({token, setToken}) => {
   return (
     <header>
             <nav>
-                <Link to="/">Home</Link>
-                <button onClick={()=>setToken({})}>Logout</button>
-                <span>Credits: {credits}</span>
-                <span>Redeems: {redeems}</span>
+                <Link to="/" className="Link">Home</Link>
+                <span className="Link">Credits: {credits}</span>
+                <span className="Link">Redeems: {redeems}</span>
+                <div className="navright">
+                  <Link className="linkbutton" onClick={()=>setToken({})}>Logout</Link>
+                </div>
+                
             </nav>
         </header>
   )

@@ -19,6 +19,11 @@ img {
   margin:0
 }
 
+.storeinfo {
+  margin-left: 6rem;
+  font-weight: bold
+}
+
 .buttoninfo {
     padding-right: 10px;
 }
