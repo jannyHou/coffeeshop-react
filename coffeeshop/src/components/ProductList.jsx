@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from 'jwt-decode'
 import "./ProductList.css"
 
-export const ProductList = () => {
+export const ProductList = ({token}) => {
   const [current, setCurrent] = useState({})
   const [name, setName] = useState("Toronto")
   const [purchases, setPurchases] = useState({})
   const [redeems, setRedeems] = useState({})
+  const [redeemLimit, setRedeemLimit] = useState(0)
+  const [countRedeem, setCountRedeem] = useState(0)
 
-  const load = async () => {
+  const loadProducts = async () => {
     const storesResponse = await fetch("http://0.0.0.0:8080/stores")
     const storesData = await storesResponse.json()
 
@@ -34,9 +37,23 @@ export const ProductList = () => {
     setCurrent(currentinfo)
   }
 
+  const loadUser = async () => {
+    if (token) {
+      const userinfo = jwtDecode(token)
+      const userid = userinfo.id
+      const user = await fetch(`http://0.0.0.0:8080/coffeelover/${userid}`)
+      const userData = await user.json()
+      setRedeemLimit(userData.redeems)
+    }
+  }
+
   useEffect(()=>{
-    load()
+    loadProducts()
   }, [name])
+
+  useEffect(()=>{
+    loadUser()
+  }, [token])
 
   const navigate = useNavigate();
   const handlePurchase = () => {
@@ -44,6 +61,9 @@ export const ProductList = () => {
   }
 
   const handleAdd = async (id) => {
+      const curr = purchases[id] ?? 0
+      if (curr >= 127) return
+
       setPurchases(prev => ({
         ...prev,
         [id]: (prev[id] ?? 0) + 1,
@@ -51,23 +71,38 @@ export const ProductList = () => {
   }
 
   const handleSub = async (id) => {
+      const curr = purchases[id] ?? 0
+      if (curr <= 0) return
+
       setPurchases(prev => ({
         ...prev,
         [id]: (prev[id] ?? 0) - 1,
       }));
   }
 
-    const handleAddRedeems = async (id) => {
+  const handleAddRedeems = async (id) => {
+      const curr = redeems[id] ?? 0
+      if (countRedeem >= redeemLimit) return
+
+      const newCountRedeem = countRedeem+1
+      setCountRedeem(newCountRedeem)
+
       setRedeems(prev => ({
         ...prev,
-        [id]: (prev[id] ?? 0) + 1,
+        [id]: curr + 1,
       }));
   }
 
   const handleSubRedeems = async (id) => {
+      const curr = redeems[id] ?? 0
+      if (curr <= 0) return
+
+      const newCountRedeem = countRedeem-1
+      setCountRedeem(newCountRedeem)
+
       setRedeems(prev => ({
         ...prev,
-        [id]: (prev[id] ?? 0) - 1,
+        [id]: curr-1,
       }));
   }
 
