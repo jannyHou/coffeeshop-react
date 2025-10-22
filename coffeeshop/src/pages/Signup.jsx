@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import "./Signup.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const Signup = ({setToken}) => {
   const [data, setData] = useState({})
@@ -33,31 +34,40 @@ export const Signup = ({setToken}) => {
   }
 
   return (
-    <div>
-      <p>Signup page</p>
-      <form onSubmit={handleSignup} className="signup">
-        <label>Email:<br></br>
-          <input onChange={(event)=>setData((prev)=>({...prev, email: event.target.value}))} type="text" name="Email" id="email" placeholder="Email" autoComplete="off" value={data.email} />
-        </label>
-        <label>Password:<br></br>
-          <input onChange={(event)=>setData((prev)=>({...prev, password: event.target.value}))} type="text" name="Password" id="password" placeholder="Password" autoComplete="off" value={data.password} />
-        </label>
-        <label>First Name:<br></br>
-          <input onChange={(event)=>setData((prev)=>({...prev, firstname: event.target.value}))} type="text" name="FirstName" id="firstname" placeholder="FirstName" autoComplete="off" value={data.firstname} />
-        </label>
-        <label>Last Name:<br></br>
-          <input onChange={(event)=>setData((prev)=>({...prev, lastname: event.target.value}))} type="text" name="LastName" id="lastname" placeholder="LastName" autoComplete="off" value={data.lastname} />
-        </label>
-        <label>Phone:<br></br>
-          <input onChange={(event)=>setData((prev)=>({...prev, phone: event.target.value}))} type="text" name="Phone" id="phone" placeholder="Phone" autoComplete="off" value={data.phone} />
-        </label>
-        <label>City:<br></br>
-          <input onChange={(event)=>setData((prev)=>({...prev, city: event.target.value}))} type="text" name="City" id="city" placeholder="City" autoComplete="off" value={data.city} />
-        </label>
-        <label>PostCode:<br></br>
-          <input onChange={(event)=>setData((prev)=>({...prev, postcode: event.target.value}))} type="text" name="Postcode" id="postcode" placeholder="Postcode" autoComplete="off" value={data.postcode} />
-        </label>
-        <button type="submit" className="signup-submit">Signup</button>
+    <div className="signup">
+      <p>Signup Page</p>
+      <form onSubmit={handleSignup}>
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input class="form-control" onChange={(event)=>setData((prev)=>({...prev, email: event.target.value}))} type="text" name="Email" id="email" placeholder="Email" autoComplete="off" value={data.email} />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input class="form-control" onChange={(event)=>setData((prev)=>({...prev, password: event.target.value}))} type="text" name="Password" id="password" placeholder="Password" autoComplete="off" value={data.password} />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">First Name</label>
+          <input class="form-control" onChange={(event)=>setData((prev)=>({...prev, firstname: event.target.value}))} type="text" name="FirstName" id="firstname" placeholder="FirstName" autoComplete="off" value={data.firstname} />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Last Name</label>
+          <input class="form-control" onChange={(event)=>setData((prev)=>({...prev, lastname: event.target.value}))} type="text" name="LastName" id="lastname" placeholder="LastName" autoComplete="off" value={data.lastname} />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Phone</label>
+          <input class="form-control" onChange={(event)=>setData((prev)=>({...prev, phone: event.target.value}))} type="text" name="Phone" id="phone" placeholder="Phone" autoComplete="off" value={data.phone} />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">City:</label>
+          <input class="form-control" onChange={(event)=>setData((prev)=>({...prev, city: event.target.value}))} type="text" name="City" id="city" placeholder="City" autoComplete="off" value={data.city} />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">PostCode</label>
+          <input class="form-control" onChange={(event)=>setData((prev)=>({...prev, postcode: event.target.value}))} type="text" name="Postcode" id="postcode" placeholder="Postcode" autoComplete="off" value={data.postcode} />
+        </div>
+        <div class="signup-submit">
+          <button type="submit" className="btn btn-light">Signup</button>
+        </div>
       </form>
     </div>
   )

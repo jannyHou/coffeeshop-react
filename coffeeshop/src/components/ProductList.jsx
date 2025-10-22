@@ -22,10 +22,10 @@ export const ProductList = () => {
         name: storeinfo.Name,
         discount: storeinfo.Discount,
         products: productsData.map((p)=>{
-            console.log(typeof(p.ProductId), p.ProductId)
             return {
               id:p.ProductId, 
               name: p.Name,
+              price: p.BasePrice,
               availability: storeinfo.Products.includes(p.ProductId)
         }})
     }
@@ -79,6 +79,7 @@ export const ProductList = () => {
         { current.products && current.products.map((p) => (
             <div key={p.id} className="ProductList">
                 <p>{p.name}</p>
+                <p>{p.price}</p>
                 <p>{p.availability? "available": "not available"}</p>
                 <img src={`${p.id}.jpg`} alt="" />
                 <div className="plbutton">
