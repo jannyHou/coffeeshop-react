@@ -1,10 +1,11 @@
 import { jwtDecode } from 'jwt-decode'
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export const Purchase = ({token}) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [receipt, setReceipt] = useState()
 
   useEffect(()=>{
     if (!token) {
@@ -13,8 +14,6 @@ export const Purchase = ({token}) => {
   })
 
   const handlePayment = async () => {
-    console.log("[handlePayment]")
-
     let userid
 
     if (token) {
@@ -40,17 +39,18 @@ export const Purchase = ({token}) => {
 
     const payRes = await fetch(payUrl, payOptions)
     const payData = await payRes.json()
-    console.log("Pay Data:")
-    console.log(payData)
+
+    setReceipt(payData)
   }
 
   return (
     <div>
-      <p>Purchase</p>
-      <span>storeid: {location.state.storeid}</span>
-      <p>products: {JSON.stringify(location.state.products, null, 2)}</p>
-      <p>redeems: {JSON.stringify(location.state.redeems, null, 2)}</p>
+      <p>Click Pay to purchase and see your receipt</p>
       <button onClick={handlePayment}>Pay</button>
+      <div>
+        <p>Receipt</p>
+        {JSON.stringify(receipt, null, 2)}
+      </div>
     </div>
   )
 }

@@ -10,7 +10,7 @@ function App() {
    <div>
     <Header token={token} setToken={setToken}/>
       <Routes>
-          <Route path="/" element={<ProductList/>} />
+          <Route path="/" element={<ProductList token={token}/>} />
           <Route path="/login" element={<Login setToken={setToken}/>} />
           <Route path="/signup" element={<Signup/>} />
           <Route path="/purchase" element={<Purchase token={token}/>} />
