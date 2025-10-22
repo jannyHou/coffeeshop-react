@@ -1,15 +1,9 @@
 .signup {
-    display:block
-}
-
-.signup label {
     display:block;
-    margin-top:20px;
-    margin-left:50px;
+    margin:30px
 }
 
 .signup-submit {
-     display:block;
-    margin-top:20px;
+    display: block;
     place-self: center;
 }

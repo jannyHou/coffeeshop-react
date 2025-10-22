@@ -12,6 +12,11 @@ img {
 .ProductList {
   display: block;
   place-self: center;
+  margin: 30px
+}
+
+.ProductList p {
+  margin:0
 }
 
 .buttoninfo {
