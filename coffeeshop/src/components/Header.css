@@ -1,0 +1,38 @@
+nav {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 1rem 0;
+    margin: 1rem 3rem 0 0 ;
+    background-color:#3d1b02;
+    font-weight: bold;
+    width: 100%
+}
+
+.navleft {
+    margin-left: 5rem;
+}
+
+.navright {
+    margin-right: 5rem
+}
+
+nav ul {
+    display:flex;
+    justify-content: center;
+    gap:5em;
+    margin-right:25em;
+    list-style: none;
+}
+
+.Link {
+    text-decoration: none;
+    margin-left: 1rem;
+    color: white;
+    background-color: none
+}
+
+.linkbutton {
+    text-decoration: none;
+    color: white
+}

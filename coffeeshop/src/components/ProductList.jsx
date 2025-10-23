@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from 'jwt-decode'
 import "./ProductList.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const ProductList = ({token}) => {
   const [current, setCurrent] = useState({})
@@ -108,31 +109,32 @@ export const ProductList = ({token}) => {
 
   return (
     <section>
-        <p>Store: {current.name}</p>
-        <p>Store Discount: {current.discount}%</p>
+        <div className="storeinfo">
+          <p>Store: {current.name}<>&nbsp;&nbsp;&nbsp;</> Discount: {current.discount}% </p>
+        </div>
         <div className="ProductContainer">
         { current.products && current.products.map((p) => (
             <div key={p.id} className="ProductList">
                 <p>{p.name}</p>
-                <p>{p.price}</p>
+                <p>${p.price}</p>
                 <p>{p.availability? "available": "not available"}</p>
                 <img src={`${p.id}.jpg`} alt="" />
                 <div className="plbutton">
                   <span className="buttoninfo"> Purchase:</span>
-                  <button onClick={()=>handleAdd(p.id)}>ADD</button>
+                  <button className= "btn btn-light" onClick={()=>handleAdd(p.id)}>ADD</button>
                   <span className="buttonvalue">{purchases[p.id] ? purchases[p.id] : 0}</span>
-                  <button onClick={()=>handleSub(p.id)}>SUB</button>
+                  <button className= "btn btn-light" onClick={()=>handleSub(p.id)}>SUB</button>
                 </div>
                 <div className="plbutton">
                   <span className="buttoninfo"> Redeem:</span><>&nbsp;&nbsp;</>
-                  <button onClick={()=>handleAddRedeems(p.id)}>ADD</button>
+                  <button className= "btn btn-light" onClick={()=>handleAddRedeems(p.id)}>ADD</button>
                   <span className="buttonvalue">{redeems[p.id] ? redeems[p.id] : 0}</span>
-                  <button onClick={()=>handleSubRedeems(p.id)}>SUB</button>
+                  <button className= "btn btn-light" onClick={()=>handleSubRedeems(p.id)}>SUB</button>
                 </div>
             </div>            
         )) }
         </div>
-        <button className="purchase" onClick={()=>handlePurchase()}>Purchase</button>
+        <button className="purchase btn btn-light" onClick={()=>handlePurchase()}>Purchase</button>
     </section>
   )
 }

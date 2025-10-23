@@ -1,6 +1,8 @@
 import { jwtDecode } from 'jwt-decode'
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import "./Purchase.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const Purchase = ({token}) => {
   const navigate = useNavigate();
@@ -44,10 +46,11 @@ export const Purchase = ({token}) => {
   }
 
   return (
-    <div>
+    <div className="purchase-container">
       <p>Click Pay to purchase and see your receipt</p>
-      <button onClick={handlePayment}>Pay</button>
-      <div>
+      <p>Then refresh to see your coffeebux</p>
+      <button className="btn btn-primary" onClick={handlePayment}>Pay</button>
+      <div className="receipt">
         <p>Receipt</p>
         {JSON.stringify(receipt, null, 2)}
       </div>
