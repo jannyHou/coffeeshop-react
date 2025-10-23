@@ -38,7 +38,6 @@ export const Signup = () => {
 
   return (
     <div className="signup">
-      <p>Signup Page</p>
       <form onSubmit={handleSignup}>
         <div class="mb-3">
           <label class="form-label">Email</label>

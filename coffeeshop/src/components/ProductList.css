@@ -21,7 +21,9 @@ img {
 
 .storeinfo {
   margin-left: 6rem;
-  font-weight: bold
+  margin-top: 1rem;
+  font-weight: bold;
+  text-align: center;
 }
 
 .buttoninfo {

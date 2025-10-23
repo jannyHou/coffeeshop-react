@@ -109,7 +109,9 @@ export const ProductList = ({token}) => {
 
   return (
     <section>
-        <p className="storeinfo">Store: {current.name}<>&nbsp;&nbsp;&nbsp;</> Discount: {current.discount}% </p>
+        <div className="storeinfo">
+          <p>Store: {current.name}<>&nbsp;&nbsp;&nbsp;</> Discount: {current.discount}% </p>
+        </div>
         <div className="ProductContainer">
         { current.products && current.products.map((p) => (
             <div key={p.id} className="ProductList">

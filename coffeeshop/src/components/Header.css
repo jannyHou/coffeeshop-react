@@ -3,9 +3,10 @@ nav {
     justify-content: space-between; 
     align-items: center;
     padding: 1rem 0;
-    margin-bottom: 3rem;
+    margin: 1rem 3rem 0 0 ;
     background-color:#3d1b02;
     font-weight: bold;
+    width: 100%
 }
 
 .navleft {

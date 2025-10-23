@@ -41,7 +41,10 @@ export const Header = ({token, setToken}) => {
   return (
     <header>
             <nav>
-                <Link to="/" className="Link">Home</Link>
+                <div className="navleft">
+                  <Link to="/" className="Link">Home</Link>
+                </div>
+ 
                 <span className="Link">Credits: {credits}</span>
                 <span className="Link">Redeems: {redeems}</span>
                 <div className="navright">
