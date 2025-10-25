@@ -5,6 +5,8 @@ import "./Header.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const Header = ({token, setToken}) => {
+  const HOSTNAME=import.meta.env.VITE_HOSTNAME
+  
   const [credits, setCredits] = useState()
   const [redeems, setRedeems] = useState()
 
@@ -12,7 +14,7 @@ export const Header = ({token, setToken}) => {
     if (token) {
       const userinfo = jwtDecode(token)
       const userid = userinfo.id
-      const user = await fetch(`http://0.0.0.0:8080/coffeelover/${userid}`)
+      const user = await fetch(`http://${HOSTNAME}:8080/coffeelover/${userid}`)
       const userData = await user.json()
 
       setCredits(userData.credits)

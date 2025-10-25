@@ -5,6 +5,8 @@ import "./Purchase.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const Purchase = ({token}) => {
+  const HOSTNAME=import.meta.env.VITE_HOSTNAME
+
   const navigate = useNavigate();
   const location = useLocation();
   const [receipt, setReceipt] = useState()
@@ -37,7 +39,7 @@ export const Purchase = ({token}) => {
         body: JSON.stringify(paymentinst)
     };
 
-    const payUrl = "http://0.0.0.0:8080/makepayment"
+    const payUrl = `http://${HOSTNAME}:8080/makepayment`
 
     const payRes = await fetch(payUrl, payOptions)
     const payData = await payRes.json()

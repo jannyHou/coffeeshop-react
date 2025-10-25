@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css"
 
 export const Login = ({setToken}) => {
+  const HOSTNAME=import.meta.env.VITE_HOSTNAME
+
   const [emailValue, setEmailValue] = useState("");
   const [pwdValue, setPwdValue] = useState("");
 
@@ -18,7 +20,7 @@ export const Login = ({setToken}) => {
         body: JSON.stringify({ email: emailValue, password:pwdValue })
     };
 
-    const loginUrl = "http://0.0.0.0:8080/login"
+    const loginUrl = `http://${HOSTNAME}:8080/login`
 
     const loginRes = await fetch(loginUrl, loginOptions)
     const loginData = await loginRes.json()

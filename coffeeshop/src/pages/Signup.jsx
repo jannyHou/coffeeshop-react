@@ -4,6 +4,8 @@ import "./Signup.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const Signup = () => {
+  const HOSTNAME=import.meta.env.VITE_HOSTNAME
+
   const [data, setData] = useState({})
   const navigate = useNavigate();
 
@@ -27,7 +29,7 @@ export const Signup = () => {
         })
       };
 
-      const signupUrl = "http://0.0.0.0:8080/register"
+      const signupUrl = `http://${HOSTNAME}:8080/register`
 
       const signupRes = await fetch(signupUrl, signupOptions)
       const signupData = await signupRes.json()

@@ -5,6 +5,8 @@ import "./ProductList.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const ProductList = ({token}) => {
+  const HOSTNAME=import.meta.env.VITE_HOSTNAME
+  
   const [current, setCurrent] = useState({})
   const [name, setName] = useState("Toronto")
   const [purchases, setPurchases] = useState({})
@@ -13,10 +15,10 @@ export const ProductList = ({token}) => {
   const [countRedeem, setCountRedeem] = useState(0)
 
   const loadProducts = async () => {
-    const storesResponse = await fetch("http://0.0.0.0:8080/stores")
+    const storesResponse = await fetch(`http://${HOSTNAME}:8080/stores`)
     const storesData = await storesResponse.json()
 
-    const productsResponse = await fetch("http://0.0.0.0:8080/products")
+    const productsResponse = await fetch(`http://${HOSTNAME}:8080/products`)
     const productsData = await productsResponse.json()
     
     let storeinfo = storesData.filter(s => s.Name === name)[0]
@@ -42,7 +44,7 @@ export const ProductList = ({token}) => {
     if (token) {
       const userinfo = jwtDecode(token)
       const userid = userinfo.id
-      const user = await fetch(`http://0.0.0.0:8080/coffeelover/${userid}`)
+      const user = await fetch(`http://${HOSTNAME}:8080/coffeelover/${userid}`)
       const userData = await user.json()
       setRedeemLimit(userData.redeems)
     }
